@@ -1,3 +1,9 @@
-*.pages
-/.vscode
+# Ignore Python cache files
 *__pycache__
+
+# Folder structures 
+/.vscode
+/documentation
+
+# Any .pages files
+*.pages
