@@ -4,9 +4,9 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI() 
 
+templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
-templates = Jinja2Templates(directory="templates")
 
 blog_posts: list[dict] = [
     {
@@ -25,8 +25,8 @@ blog_posts: list[dict] = [
     }
 ]
 
-@app.get("/", include_in_schema=False) 
-# @app.get("/posts", include_in_schema=False) 
+@app.get("/", include_in_schema=False, name ="home") 
+@app.get("/posts", include_in_schema=False, name ="posts") 
 def home(request: Request):  
     return templates.TemplateResponse(request, "home.html", {"posts": blog_posts, "title": "Awesome Page!!!"})
 
